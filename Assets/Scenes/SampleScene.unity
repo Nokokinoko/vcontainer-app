@@ -323,7 +323,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 482920624}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999866
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -711,6 +711,7 @@ GameObject:
   - component: {fileID: 423166896}
   - component: {fileID: 423166895}
   - component: {fileID: 423166894}
+  - component: {fileID: 423166897}
   m_Layer: 5
   m_Name: ClickButton
   m_TagString: Untagged
@@ -820,6 +821,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423166892}
   m_CullTransparentMesh: 1
+--- !u!114 &423166897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423166892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77dad63628d4510945d359a35ade616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Button: {fileID: 423166894}
+  Transform: {fileID: 423166893}
 --- !u!1 &439828325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,6 +1505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1203255926}
+  - component: {fileID: 1203255927}
   m_Layer: 5
   m_Name: ShopPanel
   m_TagString: Untagged
@@ -1519,6 +1535,23 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: 0}
   m_SizeDelta: {x: 600, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1203255927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203255925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38d4f69a25d449c91c5170d80726197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShopPanel: {fileID: 1203255925}
+  OpenButton: {fileID: 169639247}
+  CloseButton: {fileID: 1092150719}
+  ItemParent: {fileID: 506364669}
+  ItemPrefab: {fileID: 9019719859917322020, guid: 0f62529fb3bde405ba12fc74396c264e, type: 3}
 --- !u!1 &1204471573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1706,6 +1739,9 @@ MonoBehaviour:
   - {fileID: 2022209993}
   - {fileID: 423166892}
   - {fileID: 1203255925}
+  ScoreView: {fileID: 2022209995}
+  ClickButton: {fileID: 423166897}
+  ShopView: {fileID: 1203255927}
 --- !u!1 &1289240559
 GameObject:
   m_ObjectHideFlags: 0
@@ -2492,6 +2528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2022209994}
+  - component: {fileID: 2022209995}
   m_Layer: 5
   m_Name: ScorePanel
   m_TagString: Untagged
@@ -2520,6 +2557,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2022209995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022209993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7237a8800a194cdc91c4188e50597182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreText: {fileID: 1768679840}
+  ClickPowerText: {fileID: 1862671771}
 --- !u!1 &2112121121
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,7 +2625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 506364669}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -2667,7 +2718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6652036195834666215, guid: 0f62529fb3bde405ba12fc74396c264e, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 300
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 6652036195834666215, guid: 0f62529fb3bde405ba12fc74396c264e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2703,7 +2754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6652036195834666215, guid: 0f62529fb3bde405ba12fc74396c264e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000015258789
+      value: 0.0005368189
       objectReference: {fileID: 0}
     - target: {fileID: 6652036195834666215, guid: 0f62529fb3bde405ba12fc74396c264e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

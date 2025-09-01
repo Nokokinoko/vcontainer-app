@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace VContainerApp.Services
@@ -18,15 +19,22 @@ namespace VContainerApp.Services
     
     public class ItemService
     {
-        public event Action OnItemsUpdated;
+        private Subject<Unit> _itemsUpdatedSubject = new();
+        public IObservable<Unit> OnItemsUpdated => _itemsUpdatedSubject.AsObservable();
         
         public List<ShopItem> Items { get; private set; }
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public ItemService()
         {
             InitializeItems();
         }
         
+        /// <summary>
+        /// 初期化
+        /// </summary>
         private void InitializeItems()
         {
             Items = new List<ShopItem>
@@ -38,6 +46,9 @@ namespace VContainerApp.Services
             };
         }
         
+        /// <summary>
+        /// アイテム購入
+        /// </summary>
         public bool PurchaseItem(ShopItem item, ScoreService scoreService)
         {
             if (!scoreService.CanAfford(item.Cost))
@@ -53,13 +64,16 @@ namespace VContainerApp.Services
             
             scoreService.IncreaseClickPower(item.ClickPowerIncrease);
             item.PurchaseCount++;
-                
+            
             Debug.Log($"Purchased {item.Name}! Power increased by {item.ClickPowerIncrease}");
-                
-            OnItemsUpdated?.Invoke();
+            
+            _itemsUpdatedSubject.OnNext(Unit.Default);
             return true;
         }
 
+        /// <summary>
+        /// ロード
+        /// </summary>
         public void LoadData(List<int> purchaseCounts)
         {
             for (int i = 0; i < Items.Count && i < purchaseCounts.Count; i++)
@@ -67,14 +81,22 @@ namespace VContainerApp.Services
                 Items[i].PurchaseCount = purchaseCounts[i];
             }
             
-            OnItemsUpdated?.Invoke();
+            _itemsUpdatedSubject.OnNext(Unit.Default);
         }
         
+        /// <summary>
+        /// 購入回数
+        /// </summary>
         public List<int> GetPurchaseCounts()
         {
             var counts = new List<int>();
             Items.ForEach(item => counts.Add(item.PurchaseCount));
             return counts;
+        }
+
+        public void Dispose()
+        {
+            _itemsUpdatedSubject?.Dispose();
         }
     }
 }

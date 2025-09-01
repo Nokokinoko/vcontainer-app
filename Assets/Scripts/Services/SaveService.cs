@@ -16,6 +16,9 @@ namespace VContainerApp.Services
     {
         private const string SAVE_KEY = "GameSaveData";
         
+        /// <summary>
+        /// セーブ
+        /// </summary>
         public void Save(ScoreService scoreService, ItemService itemService)
         {
             var saveData = new SaveData
@@ -32,6 +35,9 @@ namespace VContainerApp.Services
             Debug.Log("Game saved!");
         }
         
+        /// <summary>
+        /// ロード
+        /// </summary>
         public bool Load(ScoreService scoreService, ItemService itemService)
         {
             if (!PlayerPrefs.HasKey(SAVE_KEY))
