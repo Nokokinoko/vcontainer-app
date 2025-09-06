@@ -12,14 +12,20 @@ namespace VContainerApp.UI
     {
         [SerializeField] private Button Button;
         [SerializeField] private Transform Transform;
+        
+        Vector3 _originalScale;
 
         private Subject<Unit> _clickedSubject = new();
         public IObservable<Unit> OnClicked => _clickedSubject.AsObservable();
         
         private CompositeDisposable _disposables = new();
+        
+        private const float DurationClickEffect = 0.2f;
 
         private void Awake()
         {
+            _originalScale = Transform.localScale;
+            
             Button.OnClickAsObservable()
                 .Subscribe(_ => HandleClickAsync(destroyCancellationToken).Forget())
                 .AddTo(_disposables);
@@ -45,33 +51,31 @@ namespace VContainerApp.UI
         private async UniTask PlayClickEffectAsync(CancellationToken token)
         {
             // 簡易的に独自実装
-            var originalScale = Transform.localScale;
-            var targetScale = originalScale * 1.1f;
+            var targetScale = _originalScale * 1.1f;
             
             // 拡大
             var elapsed = 0f;
-            var duration = 0.5f;
-            while (elapsed < duration)
+            while (elapsed < DurationClickEffect)
             {
                 elapsed += Time.deltaTime;
-                var t = elapsed / duration;
-                Transform.localScale = Vector3.Lerp(originalScale, targetScale, t);
+                var t = elapsed / DurationClickEffect;
+                Transform.localScale = Vector3.Lerp(_originalScale, targetScale, t);
                 
                 await UniTask.Yield(token);
             }
 
             // 縮小
             elapsed = 0f;
-            while (elapsed < duration)
+            while (elapsed < DurationClickEffect)
             {
                 elapsed += Time.deltaTime;
-                var t = elapsed / duration;
-                Transform.localScale = Vector3.Lerp(targetScale, originalScale, t);
+                var t = elapsed / DurationClickEffect;
+                Transform.localScale = Vector3.Lerp(targetScale, _originalScale, t);
                 
                 await UniTask.Yield(token);
             }
             
-            Transform.localScale = originalScale;
+            Transform.localScale = _originalScale;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace VContainerApp.UI
         [SerializeField] private TextMeshProUGUI PurchaseCount;
         [SerializeField] private Button PurchaseButton;
         
-        private Subject<Unit> _purchaseRequested = new Subject<Unit>();
+        private Subject<Unit> _purchaseRequested = new();
         public IObservable<Unit> OnPurchaseRequested => _purchaseRequested.AsObservable();
         
         private CompositeDisposable _disposables = new();

@@ -17,7 +17,7 @@ namespace VContainerApp.Presenter
         
         private const int IntervalAutoSaveSeconds = 30;
         
-        private CompositeDisposable _disposables = new CompositeDisposable();
+        private CompositeDisposable _disposables = new();
         
         public void Start()
         {

@@ -10,11 +10,5 @@ namespace VContainerApp.UI
         
         public void UpdateScore(int score) => ScoreText.text = $"Score: {score:N0}";
         public void UpdateClickPower(int clickPower) => ClickPowerText.text = $"Power: {clickPower:N0}";
-
-        private void Start()
-        {
-            UpdateScore(0);
-            UpdateClickPower(1);
-        }
     }
 }

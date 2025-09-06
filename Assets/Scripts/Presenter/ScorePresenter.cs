@@ -13,11 +13,15 @@ namespace VContainerApp.Presenter
         [Inject] private ScoreService ScoreService;
         [Inject] private ScoreView ScoreView;
         
-        private CompositeDisposable _disposables = new CompositeDisposable();
+        private CompositeDisposable _disposables = new();
         
         public void Start()
         {
             ScoreService.OnScoreChanged
+                .Subscribe(score => ScoreView.UpdateScore(score))
+                .AddTo(_disposables);
+            
+            ScoreService.OnClickPowerChanged
                 .Subscribe(power => ScoreView.UpdateClickPower(power))
                 .AddTo(_disposables);
             

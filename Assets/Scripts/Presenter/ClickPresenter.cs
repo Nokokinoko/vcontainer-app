@@ -15,7 +15,7 @@ namespace VContainerApp.Presenter
         [Inject] private SaveService SaveService;
         [Inject] private ItemService ItemService;
         
-        private CompositeDisposable _disposables = new CompositeDisposable();
+        private CompositeDisposable _disposables = new();
         
         public void Start()
         {
