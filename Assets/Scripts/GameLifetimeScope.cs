@@ -1,6 +1,7 @@
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using VContainerApp.Presenter;
 using VContainerApp.UI;
 
 namespace VContainerApp
@@ -32,9 +33,10 @@ namespace VContainerApp
             builder.RegisterInstance(ShopView);
             
             // Presenters
-            builder.RegisterEntryPoint<ScoreView>();
-            builder.RegisterEntryPoint<ClickButton>();
-            builder.RegisterEntryPoint<ShopView>();
+            builder.RegisterEntryPoint<GamePresenter>();
+            builder.RegisterEntryPoint<ScorePresenter>();
+            builder.RegisterEntryPoint<ClickPresenter>();
+            builder.RegisterEntryPoint<ShopPresenter>();
         }
     }
 }
